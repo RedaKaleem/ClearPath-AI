@@ -1,0 +1,180 @@
+{
+  "created_utc": "2026-10-02T17:33:58.198393+00:00",
+  "mode": "app",
+  "model": "models/yolov8n.pt",
+  "model_sha256": "31e20dde3def09e2cf938c7be6fe23d9150bbbe503982af13345706515f2ef95",
+  "model_classes": {
+    "0": "person",
+    "1": "bicycle",
+    "2": "car",
+    "3": "motorcycle",
+    "4": "airplane",
+    "5": "bus",
+    "6": "train",
+    "7": "truck",
+    "8": "boat",
+    "9": "traffic light",
+    "10": "fire hydrant",
+    "11": "stop sign",
+    "12": "parking meter",
+    "13": "bench",
+    "14": "bird",
+    "15": "cat",
+    "16": "dog",
+    "17": "horse",
+    "18": "sheep",
+    "19": "cow",
+    "20": "elephant",
+    "21": "bear",
+    "22": "zebra",
+    "23": "giraffe",
+    "24": "backpack",
+    "25": "umbrella",
+    "26": "handbag",
+    "27": "tie",
+    "28": "suitcase",
+    "29": "frisbee",
+    "30": "skis",
+    "31": "snowboard",
+    "32": "sports ball",
+    "33": "kite",
+    "34": "baseball bat",
+    "35": "baseball glove",
+    "36": "skateboard",
+    "37": "surfboard",
+    "38": "tennis racket",
+    "39": "bottle",
+    "40": "wine glass",
+    "41": "cup",
+    "42": "fork",
+    "43": "knife",
+    "44": "spoon",
+    "45": "bowl",
+    "46": "banana",
+    "47": "apple",
+    "48": "sandwich",
+    "49": "orange",
+    "50": "broccoli",
+    "51": "carrot",
+    "52": "hot dog",
+    "53": "pizza",
+    "54": "donut",
+    "55": "cake",
+    "56": "chair",
+    "57": "couch",
+    "58": "potted plant",
+    "59": "bed",
+    "60": "dining table",
+    "61": "toilet",
+    "62": "tv",
+    "63": "laptop",
+    "64": "mouse",
+    "65": "remote",
+    "66": "keyboard",
+    "67": "cell phone",
+    "68": "microwave",
+    "69": "oven",
+    "70": "toaster",
+    "71": "sink",
+    "72": "refrigerator",
+    "73": "book",
+    "74": "clock",
+    "75": "vase",
+    "76": "scissors",
+    "77": "teddy bear",
+    "78": "hair drier",
+    "79": "toothbrush"
+  },
+  "dataset_classes": {
+    "0": "Ambulance",
+    "1": "ambulance",
+    "2": "siren"
+  },
+  "class_mapping_compatible": false,
+  "split": "test",
+  "conf": 0.25,
+  "nms_iou": 0.7,
+  "imgsz": 640,
+  "device": "cpu",
+  "versions": {
+    "python": "3.12.4 (v3.12.4:8e8a4baf65, Jun  6 2024, 17:33:18) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "ultralytics": "8.3.152",
+    "torch": "2.7.1",
+    "platform": "macOS-26.2-arm64-arm-64bit"
+  },
+  "dataset_summary": {
+    "train": {
+      "images": 1169,
+      "annotated_objects": 1659,
+      "annotation_formats": {
+        "polygons": 444,
+        "boxes": 1215
+      },
+      "positive_images": 1169,
+      "negative_images": 0,
+      "objects_by_class": {
+        "0:Ambulance": 751,
+        "1:ambulance": 623,
+        "2:siren": 285
+      }
+    },
+    "val": {
+      "images": 229,
+      "annotated_objects": 334,
+      "annotation_formats": {
+        "boxes": 241,
+        "polygons": 93
+      },
+      "positive_images": 229,
+      "negative_images": 0,
+      "objects_by_class": {
+        "0:Ambulance": 116,
+        "1:ambulance": 163,
+        "2:siren": 55
+      }
+    },
+    "test": {
+      "images": 121,
+      "annotated_objects": 173,
+      "annotation_formats": {
+        "polygons": 41,
+        "boxes": 132
+      },
+      "positive_images": 121,
+      "negative_images": 0,
+      "objects_by_class": {
+        "0:Ambulance": 60,
+        "1:ambulance": 87,
+        "2:siren": 26
+      }
+    }
+  },
+  "cross_split_exact_duplicates": [],
+  "image_level_metrics": {
+    "tp": 73,
+    "fp": 0,
+    "fn": 48,
+    "tn": 0,
+    "accuracy": 0.6033057851239669,
+    "precision": 1.0,
+    "recall": 0.6033057851239669,
+    "f1": 0.7525773195876289,
+    "specificity": null,
+    "false_positive_rate": null
+  },
+  "detection_metrics": null,
+  "timing": {
+    "mean_ms": 48.62942044288382,
+    "median_ms": 49.85591699369252,
+    "p95_ms": 66.89737504348159,
+    "images_per_second": 20.546877937824597,
+    "note": "Sequential batch=1 wall time, image decoding/preprocessing/inference/postprocessing included; warm-up excluded. Not video-stream FPS."
+  },
+  "limitations": [
+    "Dataset annotations include boxes/polygons; native detection validation evaluates enclosing boxes for polygon labels, not segmentation masks.",
+    "COCO and dataset class IDs have different meanings. Ambulance detection mAP and per-class detection scores are unavailable for this checkpoint. Native model.val was intentionally not run.",
+    "No negative images: image-level accuracy equals recall, precision is trivial when alerts occur, and specificity/false-positive rate cannot be estimated. These are NOT deployment accuracy claims.",
+    "Image-level ground truth is positive if ANY annotated dataset object is present, including siren. This is an emergency-associated-image proxy, not proof of an active emergency or siren audio.",
+    "Exact-byte duplicate checks do not detect resized/augmented copies or shared scenes. No external generalization or confidence-interval claim is made."
+  ]
+}

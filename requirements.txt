@@ -1,0 +1,6 @@
+ultralytics==8.3.152
+opencv-python
+numpy
+PyYAML
+matplotlib
+torch

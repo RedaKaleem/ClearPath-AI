@@ -1,0 +1,122 @@
+image,actual_positive,predicted_positive,outcome,detected_classes,triggers,latency_ms
+000001_jpg.rf.15c94623082004795c15dc07a76be1d5.jpg,True,True,TP,"[""car"", ""car"", ""car"", ""car"", ""person"", ""car"", ""car"", ""car"", ""car"", ""car"", ""person"", ""car"", ""car"", ""car"", ""person"", ""car"", ""car"", ""truck"", ""car"", ""person"", ""car"", ""car"", ""truck"", ""car"", ""car"", ""car"", ""car"", ""truck"", ""person""]","[""truck"", ""truck"", ""truck""]",45.88
+000002_jpg.rf.0cce3ad9ea6df383830d3596180ba64d.jpg,True,True,TP,"[""person"", ""person"", ""person"", ""car"", ""car"", ""person"", ""person"", ""person"", ""person"", ""person"", ""truck"", ""car"", ""truck"", ""car"", ""person"", ""car"", ""car"", ""car"", ""person""]","[""truck"", ""truck""]",37.071
+000030_jpg.rf.e5a012f02ec80402515340bde73e541b.jpg,True,False,FN,"[""car""]",[],45.262
+00DWEUY37A15_jpg.rf.741c4ec63289bd79b7761196b082d5f4.jpg,True,True,TP,"[""truck"", ""bus""]","[""truck""]",70.687
+038TI986DAFR_jpg.rf.bb131aa9e044f65043361ac5522ad493.jpg,True,False,FN,"[""bus"", ""person"", ""person""]",[],87.95
+04_jpg.rf.e53cce908f04552a2c57b1c1dc677286.jpg,True,False,FN,"[""person"", ""bus"", ""person"", ""bus""]",[],70.116
+05O4RQIF5CSJ_aug_jpg.rf.bf1f8309fd32c3ff9fedb901ff4f9081.jpg,True,False,FN,"[""carrot"", ""carrot""]",[],67.449
+06B5FJE2HA99_jpg.rf.16e33c50a4f4f1a3a679911a88b59d93.jpg,True,True,TP,"[""truck"", ""truck"", ""bus""]","[""truck"", ""truck""]",65.507
+0ADMGPUBCCPE_jpg.rf.7ce9ed4831bcd9ee59dc78d2b30f49e3.jpg,True,True,TP,"[""truck"", ""truck""]","[""truck"", ""truck""]",56.761
+0K8AP8D9DDGH_jpg.rf.8ceeb1fe1a546155a23c9366cfed5f6a.jpg,True,False,FN,"[""bus""]",[],57.176
+0O59XTZWHHDO_jpg.rf.3fb03799e8d995659d29b786bd10a4db.jpg,True,False,FN,"[""person"", ""bus"", ""person"", ""motorcycle""]",[],57.11
+0R3D8T0AXV2S_jpg.rf.85f211434251060108ba6d1f902c6cc5.jpg,True,False,FN,"[""dog"", ""bus"", ""train""]",[],53.519
+0U3NNE3NBFDB_jpg.rf.287d50c32f242fee6e3f01f6ebe60407.jpg,True,True,TP,"[""car"", ""truck"", ""car"", ""person"", ""car""]","[""truck""]",54.772
+10LQ7Y7C3XUT_aug_jpg.rf.bb92c669f37496476cf087e811ef33a2.jpg,True,False,FN,"[""person""]",[],54.282
+128B6UKBBVZJ_jpg.rf.4fed5f6d65d6be21b90676f77fc8c589.jpg,True,True,TP,"[""truck"", ""truck""]","[""truck"", ""truck""]",54.123
+15UPOLSK4D4C_jpg.rf.4d7589370d9aa36803b3e864959136b9.jpg,True,True,TP,"[""bus"", ""car"", ""truck"", ""car"", ""car""]","[""truck""]",54.539
+16_jpeg_jpg.rf.d3b44e73c5c03c710670843007f3a887.jpg,True,False,FN,"[""bus"", ""bus"", ""bus"", ""bus"", ""bus"", ""bus""]",[],54.37
+17-traffic-jam_l_jpg.rf.ee2131a1a53a17d8d6aa4a6fc0fa7e6c.jpg,True,True,TP,"[""car"", ""bus"", ""bus"", ""bus"", ""person"", ""car"", ""person"", ""person"", ""car"", ""bus"", ""car"", ""bus"", ""truck"", ""person"", ""truck"", ""car"", ""car"", ""person"", ""truck""]","[""truck"", ""truck"", ""truck""]",56.179
+173G2IXWCX64_jpg.rf.01cb6278b18dd0beb904880be6750d2c.jpg,True,True,TP,"[""car"", ""truck"", ""bus"", ""car""]","[""truck""]",51.474
+1JULCYSK2WUY_jpg.rf.2f904929884b59b06315e1ae69539e38.jpg,True,False,FN,"[""bus""]",[],51.374
+1LR5UQSZCRFF_jpg.rf.f8b639521bca5b3f1c51097378da1411.jpg,True,True,TP,"[""truck""]","[""truck""]",52.051
+1OGDTK9MT4VO_jpg.rf.04d9f5cfe57a722a262699cf9cca5304.jpg,True,True,TP,"[""bus"", ""truck""]","[""truck""]",53.768
+1VHWZRJVT6ID_jpg.rf.c3aa2789f0517cab2deb4cfcf54f82bf.jpg,True,True,TP,"[""truck""]","[""truck""]",52.731
+1VQ28CUW3D51_jpg.rf.12e14ed7354c4d6ca93ccc1a85b903ac.jpg,True,True,TP,"[""truck"", ""car"", ""truck"", ""truck""]","[""truck"", ""truck"", ""truck""]",53.321
+1Z6C2SG7OC2F_jpg.rf.cc84322b72d170f87e4736ddc641c148.jpg,True,True,TP,"[""truck""]","[""truck""]",55.277
+22266JCG2KJ0_jpg.rf.c790788f4fbee9a17f853e29235f94a6.jpg,True,False,FN,"[""bus""]",[],52.583
+22_20_11zon_jpg.rf.c9f5c2a15ea77029c3308f188e21ff9e.jpg,True,True,TP,"[""truck""]","[""truck""]",53.5
+2DALAS5VSJUW_jpg.rf.7add318d4612698828b3a0a294cb32d4.jpg,True,False,FN,"[""bus""]",[],53.766
+2JN01MZWSWMP_jpg.rf.bb714dd729ad7633a403b9d203115265.jpg,True,True,TP,"[""truck""]","[""truck""]",54.871
+2QUOS5YIY21P_jpg.rf.f87d96a3f9927b5b2cbb1abd379eaceb.jpg,True,True,TP,"[""truck""]","[""truck""]",35.313
+2TF4HILC9WPF_jpg.rf.d96514047d245edad02406b83f607b05.jpg,True,False,FN,"[""car""]",[],53.492
+33_jpg.rf.2a784e75ef92374f9a66929b68debc7b.jpg,True,False,FN,"[""bus""]",[],52.391
+34_jpg.rf.7df3763129a6386116b6aef7e1ae9998.jpg,True,True,TP,"[""person"", ""truck"", ""truck"", ""person"", ""person"", ""truck"", ""bus"", ""person""]","[""truck"", ""truck"", ""truck""]",53.053
+37_jpg.rf.99e623449382684a6f1171b5be212bb1.jpg,True,False,FN,"[""person"", ""bus"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person""]",[],54.105
+3D7Z5TFX64W4_jpg.rf.db38f101f393d126f0c5c15f355cb2b6.jpg,True,True,TP,"[""car"", ""car"", ""car"", ""truck""]","[""truck""]",60.589
+3H6W316OU59Q_jpg.rf.2bc57af6baa15060ac99ad617ee6467a.jpg,True,False,FN,"[""bus"", ""person""]",[],46.047
+43_jpg.rf.2e7d8e122042ef9c16dbaecfccdec937.jpg,True,True,TP,"[""car"", ""car"", ""person"", ""bus"", ""truck"", ""car"", ""truck"", ""truck"", ""car"", ""person"", ""bus"", ""car"", ""person"", ""truck"", ""car"", ""car""]","[""truck"", ""truck"", ""truck"", ""truck""]",65.98
+4NMQZ0A15DWN_jpg.rf.919b74e78f554cf092489aa98cdaee6e.jpg,True,True,TP,"[""truck"", ""car"", ""car"", ""car"", ""truck"", ""car"", ""clock"", ""car""]","[""truck"", ""truck""]",46.623
+4ON8BOAHJSSN_jpg.rf.992b1e2b0f3887736fc6ae1ee2855549.jpg,True,False,FN,"[""bus""]",[],65.655
+4R1P7CUDBW9W_jpg.rf.4249b34e8277d7f9eb54c0830365d851.jpg,True,True,TP,"[""truck"", ""clock""]","[""truck""]",67.245
+4U1P8X2PLZEN_jpg.rf.4608e5c00bd592cb16d07ccfa9144c53.jpg,True,True,TP,"[""person"", ""person"", ""truck"", ""person"", ""bus"", ""person""]","[""truck""]",51.556
+51WFS8ELM57U_jpg.rf.789be74a60eb17dbf393fbac6b312d0a.jpg,True,True,TP,"[""car"", ""car"", ""truck"", ""car"", ""car"", ""bus"", ""car""]","[""truck""]",66.897
+51_jpg.rf.d01aea65a78335f40ee0ecda75cbd2e5.jpg,True,True,TP,"[""car"", ""car"", ""car"", ""truck"", ""car"", ""car"", ""car"", ""person"", ""bird"", ""bird"", ""person"", ""car"", ""person""]","[""truck""]",64.389
+55DAUXOFRA9K_jpg.rf.0207a8af3a33c72cf8429bc90d361d12.jpg,True,False,FN,"[""bus""]",[],66.223
+5BE5V9H3CBEL_jpg.rf.7769713ff63041d9c8d9520dc81ad1fc.jpg,True,False,FN,"[""suitcase"", ""suitcase"", ""car"", ""bus""]",[],66.716
+5BXY3LRNT9IE_jpg.rf.fe4a77f18523a57c4bee83b1f85c3e00.jpg,True,True,TP,"[""truck"", ""car"", ""car"", ""clock"", ""car"", ""car"", ""person""]","[""truck""]",45.371
+67UONZB7USHL_jpg.rf.b69a61eb65a964b421674fc9a1314165.jpg,True,True,TP,"[""truck"", ""car"", ""truck""]","[""truck"", ""truck""]",64.044
+689FUT968BI4_aug_jpg.rf.c729201d4bda3a56c55570e8a7ae2dbf.jpg,True,False,FN,[],[],65.664
+68QORIPIJK98_aug_jpg.rf.bde562f3645111c6aa2b5b368aaa7233.jpg,True,False,FN,[],[],91.254
+6KTV7RKYC5HP_jpg.rf.a3d89d3bd7460c8e8f9b21995aa6b8ba.jpg,True,True,TP,"[""truck""]","[""truck""]",43.801
+779S6NLDP55Q_jpg.rf.f31bddb5a96b08ce63a55fdb723b2ff0.jpg,True,True,TP,"[""truck""]","[""truck""]",44.797
+7Q8N2LBVD0D1_jpg.rf.9cc3a5d7b00cf93b9d25ab686467cbce.jpg,True,True,TP,"[""truck""]","[""truck""]",61.21
+8KJ3AP8ZOGW5_jpg.rf.26c5b8108a56b64b04d75be32540fb45.jpg,True,True,TP,"[""truck""]","[""truck""]",45.946
+93N9D1KWCY22_aug_jpg.rf.b42263fc5078c763a84d6acf43932177.jpg,True,False,FN,"[""carrot""]",[],57.221
+9E4XHZ1AJTJ2_jpg.rf.135ccb38e8310def4f488b5910cccc9e.jpg,True,True,TP,"[""truck""]","[""truck""]",39.523
+AC3SPT7ODOIJ_jpg.rf.d29f4927143044db0b3c3836e26cb567.jpg,True,True,TP,"[""bus"", ""truck""]","[""truck""]",35.467
+AF40K9AR7CX1_jpg.rf.1748581fde936ddba8475796b7551ec2.jpg,True,True,TP,"[""truck""]","[""truck""]",39.005
+AW0XTTKDSRJA_jpg.rf.4e54c18fab13f2c3234b7d77a9ad9083.jpg,True,False,FN,"[""bus""]",[],50.715
+BJ63JZOHSX64_jpg.rf.0a75f867001e8a7f175dfee243d24bea.jpg,True,True,TP,"[""car"", ""truck"", ""person"", ""car"", ""person"", ""person""]","[""truck""]",40.239
+D8KA5JY8YU2R_jpg.rf.518aaaee0a88b64c2dd7a754ec3cb88f.jpg,True,True,TP,"[""truck"", ""truck"", ""train""]","[""truck"", ""truck""]",39.598
+DARY5IL1JS9U_jpg.rf.28b527c46956edc2b81ff0aeaa14d28c.jpg,True,True,TP,"[""truck""]","[""truck""]",41.961
+F9JFOBVL44WL_aug_jpg.rf.b837951bfa7db2d200a460b52f073d07.jpg,True,False,FN,"[""person""]",[],56.408
+FXP9BJ0Z8MN6_aug_jpg.rf.4aeecb6cc28736639275af575b63e4ba.jpg,True,False,FN,[],[],57.257
+G9KQANRC0N9A_jpg.rf.2a697a5c16480d42fbc79f4b0f6e6238.jpg,True,True,TP,"[""truck"", ""car""]","[""truck""]",40.598
+HSQ5ZW94JFUD_jpg.rf.b2f19269b138d0301d76294f226f59e9.jpg,True,True,TP,"[""truck""]","[""truck""]",40.331
+IYRRO7NSWF55_jpg.rf.46d80cb41c15b395154228533e553390.jpg,True,True,TP,"[""truck""]","[""truck""]",38.838
+Image_118_jpg.rf.a4cefd815c4dfd9c8d0f31b3519d7af0.jpg,True,False,FN,"[""car"", ""bus"", ""car"", ""car"", ""car"", ""car"", ""car"", ""car"", ""car"", ""person"", ""bus"", ""car"", ""car"", ""car"", ""person"", ""bus"", ""car"", ""person"", ""person"", ""person"", ""car"", ""car"", ""car""]",[],34.579
+Image_157_jpg.rf.e79b6f384623501a0696d4bcda9dadb8.jpg,True,False,FN,[],[],55.547
+Image_18_jpg.rf.0155dd682ea952c3522f9e5d706620f2.jpg,True,False,FN,"[""bus""]",[],42.972
+Image_210_png.rf.23f5b9f13ac0fffadf7413b3d15030e1.jpg,True,False,FN,"[""parking meter""]",[],44.753
+Image_248_jpg.rf.cae7647b1e981c1146a2e1995e297915.jpg,True,True,TP,"[""truck"", ""truck"", ""bus""]","[""truck"", ""truck""]",41.34
+Image_251_png.rf.1ac8111c0d067d45255a66b0732f5f0a.jpg,True,True,TP,"[""truck"", ""car""]","[""truck""]",37.009
+Image_265_jpg.rf.d7bd423388459427d2d6166e2b241343.jpg,True,True,TP,"[""person"", ""person"", ""truck"", ""truck""]","[""truck"", ""truck""]",38.884
+Image_272_jpg.rf.c01a23e4846fbf6bde7fa9d2a68aa89d.jpg,True,True,TP,"[""truck""]","[""truck""]",35.549
+Image_279_jpg.rf.11e2a78d318bd9766824faf6739cd616.jpg,True,True,TP,"[""truck""]","[""truck""]",42.304
+Image_287_jpg.rf.6ea84ed259c01714aedf797dad78969f.jpg,True,True,TP,"[""car"", ""car"", ""truck"", ""car"", ""person"", ""car"", ""car"", ""car"", ""car"", ""car"", ""car""]","[""truck""]",35.516
+Image_295_jpg.rf.824c7f56b5a6e622134ad0664f630adc.jpg,True,False,FN,"[""bus"", ""bus""]",[],54.541
+Image_298_jpg.rf.f91a34df8a6a3a5cd6d039fd133db16f.jpg,True,True,TP,"[""truck""]","[""truck""]",40.455
+Image_310_jpg.rf.72dd859129b2ea1cbb956eeb58f910e7.jpg,True,True,TP,"[""truck""]","[""truck""]",40.753
+Image_315_jpg.rf.255461fc8c54e877c436dd6834b8a217.jpg,True,False,FN,"[""person"", ""bus"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person""]",[],41.516
+Image_336_jpg.rf.d8658576cefdf87b44d4332b5d394980.jpg,True,False,FN,"[""car"", ""car"", ""car"", ""car"", ""car"", ""bus"", ""car"", ""person"", ""car"", ""car"", ""person"", ""bus"", ""car"", ""person"", ""car"", ""car"", ""car"", ""car"", ""person"", ""car"", ""car"", ""person"", ""car"", ""person"", ""car"", ""car"", ""person"", ""car"", ""car"", ""person"", ""car"", ""person"", ""person"", ""car"", ""car"", ""car"", ""car"", ""person"", ""person""]",[],38.408
+Image_396_jpg.rf.f4a83ea0b26a34d291debd6afa004c36.jpg,True,False,FN,"[""car"", ""car"", ""car"", ""car"", ""traffic light"", ""bus"", ""car"", ""car"", ""traffic light"", ""traffic light"", ""car"", ""car"", ""car"", ""car"", ""car"", ""car"", ""traffic light"", ""car"", ""car"", ""bus""]",[],36.301
+Image_408_png.rf.f720994247f3573c61c6c6e146db6d0d.jpg,True,False,FN,[],[],35.532
+Image_409_jpg.rf.6441ca19853b1e08115f8e19e2a67313.jpg,True,True,TP,"[""car"", ""car"", ""car"", ""car"", ""car"", ""person"", ""truck"", ""person"", ""car"", ""person"", ""person"", ""person"", ""car"", ""person"", ""person"", ""person""]","[""truck""]",31.369
+Image_414_jpg.rf.cca8a6794c9ba0d1ca0cef83d795e567.jpg,True,False,FN,"[""person"", ""person"", ""bus"", ""traffic light""]",[],35.49
+Image_488_webp.rf.05ddb384b1808e9478fedd45dae7f027.jpg,True,True,TP,"[""truck""]","[""truck""]",32.428
+Image_60_jpg.rf.408d0365246dcc612af4209cc350594c.jpg,True,False,FN,"[""bus""]",[],39.557
+Image_75_jpg.rf.e0712dd0407c2522ab759c0ab481e9b7.jpg,True,True,TP,"[""truck"", ""bus"", ""person"", ""person"", ""person""]","[""truck""]",33.009
+Image_81_jpg.rf.5ec892e54893893283b0a8563dd5682d.jpg,True,False,FN,"[""bus"", ""car""]",[],37.209
+Image_96_png.rf.72cc57eca62efcfa9a2827a7654a2c9e.jpg,True,True,TP,"[""truck""]","[""truck""]",54.745
+JNI7FZMU563E_jpg.rf.f272b7eff4a6da175d757fc90efb5933.jpg,True,True,TP,"[""truck"", ""bus"", ""truck""]","[""truck"", ""truck""]",46.966
+K1TGJUZB5NNG_jpg.rf.922ff750189e137a686618d3dcabb594.jpg,True,True,TP,"[""car"", ""truck""]","[""truck""]",39.492
+K2W1U0PYYEHN_jpg.rf.5bf4157359a8fa095a9534782ce6085d.jpg,True,True,TP,"[""truck"", ""truck"", ""bus"", ""truck""]","[""truck"", ""truck"", ""truck""]",37.528
+KGHDNEV5YSCX_jpg.rf.18959cc282b01868531960a3c9919af0.jpg,True,True,TP,"[""car"", ""bus"", ""truck""]","[""truck""]",39.558
+LLVYFPWIEIPQ_jpg.rf.f37d6c1381a7353e3850a3d651b9441b.jpg,True,True,TP,"[""car"", ""car"", ""car"", ""car"", ""car"", ""car"", ""car"", ""car"", ""car"", ""truck""]","[""truck""]",29.715
+M2H2DW7B956K_aug_jpg.rf.7cf4fc37028ba6008dd463b4b78ab33d.jpg,True,False,FN,[],[],49.702
+NGIE3J2EBKQF_aug_jpg.rf.f3e97471fe209a722413b4aa2d28dc73.jpg,True,True,TP,"[""truck"", ""train""]","[""truck""]",52.332
+NMSSH34SSEEM_jpg.rf.43e165e2788d1b83083a992d45c81136.jpg,True,True,TP,"[""truck""]","[""truck""]",37.846
+O0D2EYZM062M_jpg.rf.f792d5eee45a840979ed2170c212c65c.jpg,True,False,FN,"[""person"", ""person""]",[],38.837
+OAUQ0K7YIBON_jpg.rf.504294e550aeb2a5597db6041c4a06aa.jpg,True,False,FN,"[""train""]",[],53.157
+OIP-2024-07-12T155840-109_jpeg.rf.f3cfbd490452276ec48da9f38dd8885c.jpg,True,False,FN,"[""car"", ""car""]",[],39.634
+OIP-4-_jpeg.rf.5a7b45ef8d2026ef58470880d847d878.jpg,True,True,TP,"[""truck"", ""person"", ""person""]","[""truck""]",37.059
+P3QV4JSE29HS_jpg.rf.33cd20b0f40e2a1326ff592f2c74ccd8.jpg,True,True,TP,"[""truck"", ""car""]","[""truck""]",32.803
+PZG4QKP0MHGL_jpg.rf.b3225040a94f3a29f73c860860f56618.jpg,True,True,TP,"[""fire hydrant"", ""truck"", ""bus"", ""car"", ""truck""]","[""fire hydrant"", ""truck"", ""truck""]",39.809
+TBL5X1DICO2F_aug_jpg.rf.9e444ac6a6f8b84e021b230f1d34d992.jpg,True,False,FN,"[""bed"", ""person""]",[],53.09
+TCWJK9HDL8OI_jpg.rf.b8be0fd07e862d33ee1260d779f63258.jpg,True,True,TP,"[""truck""]","[""truck""]",30.716
+TIRDSCMZVH4I_jpg.rf.d47eb40a2290b9e552e12ac3b9864b98.jpg,True,True,TP,"[""truck"", ""bus""]","[""truck""]",36.689
+UN6CT5PMQE5M_aug_jpg.rf.62e754a33a00b4596d1af63937e11eba.jpg,True,False,FN,[],[],54.679
+V2RKS4JB21U5_jpg.rf.49afe476e4b081ce7b2a97d90a2bb160.jpg,True,False,FN,"[""car"", ""car"", ""car"", ""bus""]",[],41.522
+Y3972UAWWTXV_jpg.rf.26b0c9e19fa054b66b37ef4b48eb26d7.jpg,True,True,TP,"[""bus"", ""truck""]","[""truck""]",36.118
+Z23RKZDKSDW2_jpg.rf.9a714c1d22b262d850a3c36f0ac992f0.jpg,True,True,TP,"[""truck"", ""person"", ""car"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""truck"", ""person"", ""person""]","[""truck"", ""truck""]",39.527
+Z7L2447541OF_jpg.rf.b9d2a3b2abbe0755a5fd99692486940b.jpg,True,True,TP,"[""car"", ""person"", ""bus"", ""truck""]","[""truck""]",33.576
+ZJ70CQV7P04L_jpg.rf.f029f77f50eea9d478c610d383f48341.jpg,True,False,FN,"[""bus"", ""bus""]",[],38.47
+ZOME98QFC7CD_jpg.rf.37693592a4ef789981e5df7098ba6e5e.jpg,True,True,TP,"[""car"", ""truck"", ""person"", ""handbag""]","[""truck""]",36.597
+ezgif-frame-013_png_jpg.rf.4e2a023818a8007110de4a4d930349d3.jpg,True,True,TP,"[""person"", ""person"", ""person"", ""person"", ""bus"", ""person"", ""person"", ""person"", ""truck"", ""car""]","[""truck""]",50.401
+ezgif-frame-021-1-_jpg.rf.ad8c6602a3205fbb008df6d722a998cc.jpg,True,True,TP,"[""truck"", ""person"", ""person"", ""person""]","[""truck""]",49.856
+ezgif-frame-051_jpg.rf.cf7fcbe3293a0abb4336079de0ee9a39.jpg,True,True,TP,"[""person"", ""bus"", ""truck""]","[""truck""]",53.091
+ezgif-frame-060-1-_jpg.rf.2845210de578878dafb9ba8db480690b.jpg,True,False,FN,"[""bus""]",[],52.012
+ezgif-frame-087-3-_jpg.rf.1684d6223ba667ddaef7823a56146eea.jpg,True,False,FN,"[""clock""]",[],51.798
+ezgif-frame-111_jpg.rf.7f4da91cb4cfb24aa4e4a3612226ca42.jpg,True,False,FN,"[""bus"", ""bus""]",[],53.014
+ezgif-frame-124-2-_jpg.rf.01b8e3bea1a02be8b612eb5fe0a27f4a.jpg,True,True,TP,"[""car"", ""truck"", ""bus"", ""car"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""person"", ""car"", ""person"", ""car"", ""person""]","[""truck""]",55.808
