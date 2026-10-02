@@ -11,6 +11,7 @@ import time
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from evaluation_protocol import load_metadata, protocol_issues, slice_metrics, presentation_wording
 
 KEYWORDS = ('ambulance', 'police', 'fire', 'truck')  # controllers/detection.py
 IMAGE_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.bmp', '.webp'}
@@ -44,6 +45,8 @@ def audit_dataset(root, names):
                         if p.suffix.lower() in IMAGE_EXTENSIONS)
         if not images:
             raise ValueError(f'No images in {folder}')
+        if len({p.stem for p in images}) != len(images):
+            raise ValueError(f'Ambiguous annotation filenames in {folder}: repeated image stems')
         counts, rows, formats = Counter(), [], Counter()
         for image in images:
             label = root / folder / 'labels' / (image.stem + '.txt')
@@ -92,23 +95,45 @@ def main():
     parser.add_argument('--conf', type=float, default=0.25, help='Fixed image-alert confidence threshold; do not tune on test')
     parser.add_argument('--imgsz', type=int, default=640)
     parser.add_argument('--device', default='cpu')
+    parser.add_argument('--metadata', type=Path, help='CSV with split,image,group_id and optional lighting,weather,source')
+    parser.add_argument('--target-ids', type=int, nargs='+', help='Dataset class IDs defining an image alert; default: all IDs')
+    parser.add_argument('--strict-protocol', action='store_true', help='Require positive/negative controls, provenance, and no cross-split overlap')
+    parser.add_argument('--audit-only', action='store_true', help='Audit data and protocol without loading weights or running inference')
     parser.add_argument('--mode', choices=['auto', 'app', 'detector'], default='auto',
                         help='app mirrors existing keyword rule; detector requires exact label mapping')
     args = parser.parse_args()
     if not 0 <= args.conf <= 1:
         parser.error('--conf must be between 0 and 1')
+    if args.imgsz <= 0:
+        parser.error('--imgsz must be positive')
     import yaml
-    import numpy as np
-    import torch
-    import ultralytics
-    from ultralytics import YOLO
-    if not args.model.is_file():
-        raise FileNotFoundError(args.model)  # no implicit download
     cfg = yaml.safe_load(args.data.read_text())
     names = cfg['names']
     names = dict(enumerate(names)) if isinstance(names, list) else {int(k):v for k,v in names.items()}
     root = args.data.resolve().parent
     summary, records, overlaps = audit_dataset(root, names)
+    targets = set(names if args.target_ids is None else args.target_ids)
+    if not targets or not targets.issubset(names):
+        parser.error('--target-ids must be nonempty and present in data.yaml names')
+    metadata, group_overlaps = load_metadata(args.metadata, records) if args.metadata else (None, {})
+    issues = protocol_issues(records, args.split, targets, overlaps, metadata, group_overlaps)
+    protocol = dict(target_ids=sorted(targets), issues=issues,
+                    checks_passed=not issues, cross_split_groups=group_overlaps,
+                    metadata_sha256=sha256(args.metadata) if args.metadata else None,
+                    note='Checks depend on supplied provenance; passing is not proof of scene independence or deployment readiness.')
+    if args.audit_only:
+        print(json.dumps(dict(dataset_summary=summary, cross_split_exact_duplicates=overlaps,
+                              protocol=protocol), indent=2))
+    if args.strict_protocol and issues:
+        parser.error('Protocol checks failed: ' + ' '.join(issues))
+    if args.audit_only:
+        return
+    if not args.model.is_file():
+        raise FileNotFoundError(args.model)  # no implicit download
+    import numpy as np
+    import torch
+    import ultralytics
+    from ultralytics import YOLO
     model = YOLO(str(args.model.resolve()))
     compatible = dict(model.names) == names
     if args.mode == 'detector' and not compatible:
@@ -118,16 +143,19 @@ def main():
     out.mkdir(parents=True, exist_ok=False)
     selected = records[args.split]
     print(f'Evaluating {len(selected)} {args.split} images in {mode} mode. Output: {out}', flush=True)
-    manifest = [{**r, 'image': str(r['image']), 'label': str(r['label'])} for r in selected]
+    manifest = [{**r, 'image': str(r['image'].relative_to(root)), 'label': str(r['label'].relative_to(root)),
+                 'metadata': metadata[(args.split, r['image'].name)] if metadata else None} for r in selected]
     (out/'test_manifest.json').write_text(json.dumps(manifest, indent=2))
     warnings = ['Dataset annotations include boxes/polygons; native detection validation evaluates enclosing boxes for polygon labels, not segmentation masks.']
     if not compatible:
         warnings.append('COCO and dataset class IDs have different meanings. Ambulance detection mAP and per-class detection scores are unavailable for this checkpoint. Native model.val was intentionally not run.')
-    if summary[args.split]['negative_images'] == 0:
+    if all(set(r['classes']) & targets for r in selected):
         warnings.append('No negative images: image-level accuracy equals recall, precision is trivial when alerts occur, and specificity/false-positive rate cannot be estimated. These are NOT deployment accuracy claims.')
     if overlaps:
         warnings.append(f'{len(overlaps)} exact-image duplicate groups span dataset splits; the supplied test set is not fully independent. Re-split by original scene before evaluating a trained model.')
-    warnings.append('Image-level ground truth is positive if ANY annotated dataset object is present, including siren. This is an emergency-associated-image proxy, not proof of an active emergency or siren audio.')
+    warnings.extend(issues)
+    warnings.append(f'Image-level ground truth is positive for dataset target IDs {sorted(targets)}. Other annotated classes are target-negative. This is a visual-object proxy, not proof of an active emergency or siren audio.')
+    warnings.append('Condition slices are descriptive image-alert metrics, not per-condition detection mAP. Correlated frames and small slices limit inference; no confidence intervals are claimed.')
     warnings.append('Exact-byte duplicate checks do not detect resized/augmented copies or shared scenes. No external generalization or confidence-interval claim is made.')
     model.predict(str(selected[0]['image']), imgsz=args.imgsz, conf=args.conf,
                   iou=0.7, device=args.device, verbose=False, save=False)  # excluded warm-up
@@ -140,14 +168,18 @@ def main():
                                iou=0.7, device=args.device, verbose=False, save=False)[0]
         elapsed = (time.perf_counter()-tick)*1000
         latencies.append(elapsed)
-        classes = [result.names[int(c)] for c in result.boxes.cls.cpu().tolist()]
-        triggers = [c for c in classes if any(k in c.lower() for k in KEYWORDS)] if mode == 'app' else classes
-        predicted, actual = bool(triggers), bool(record['classes'])
+        predicted_ids = [int(c) for c in result.boxes.cls.cpu().tolist()]
+        classes = [result.names[c] for c in predicted_ids]
+        triggers = ([c for c in classes if any(k in c.lower() for k in KEYWORDS)] if mode == 'app'
+                    else [result.names[c] for c in predicted_ids if c in targets])
+        predicted, actual = bool(triggers), bool(set(record['classes']) & targets)
         outcome = 'TP' if actual and predicted else 'FN' if actual else 'FP' if predicted else 'TN'
         tp += outcome == 'TP'; fp += outcome == 'FP'; fn += outcome == 'FN'; tn += outcome == 'TN'
         rows.append(dict(image=record['image'].name, actual_positive=actual, predicted_positive=predicted,
                          outcome=outcome, detected_classes=json.dumps(classes), triggers=json.dumps(triggers),
                          latency_ms=round(elapsed,3)))
+        rows[-1].update(metadata[(args.split, record['image'].name)] if metadata else
+                        dict(group_id='unknown', lighting='unknown', weather='unknown', source='unknown'))
         if i % 20 == 0 or i == len(selected):
             print(f'{i}/{len(selected)} images evaluated', flush=True)
     duration = time.perf_counter()-start
@@ -183,6 +215,7 @@ def main():
                   conf=args.conf, nms_iou=0.7, imgsz=args.imgsz, device=args.device,
                   versions=dict(python=sys.version, ultralytics=ultralytics.__version__, torch=torch.__version__, platform=platform.platform()),
                   dataset_summary=summary, cross_split_exact_duplicates=overlaps,
+                  protocol=protocol, image_alert_slices=slice_metrics(rows, binary_metrics),
                   image_level_metrics=metrics, detection_metrics=detection,
                   timing=dict(mean_ms=float(np.mean(latencies)), median_ms=float(np.median(latencies)),
                               p95_ms=float(np.percentile(latencies,95)), images_per_second=len(selected)/duration,
@@ -191,6 +224,9 @@ def main():
     (out/'metrics.json').write_text(json.dumps(result, indent=2, allow_nan=False))
     with (out/'per_image_results.csv').open('w', newline='') as f:
         w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
+    with (out/'failure_cases.csv').open('w', newline='') as f:
+        w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader()
+        w.writerows(row for row in rows if row['outcome'] in ('FP', 'FN'))
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
@@ -217,8 +253,15 @@ def main():
     else:
         lines += ['', '**Not available:** this model has no compatible ambulance/siren class mapping. Reporting native class-ID scores would compare different categories.']
     lines += ['', '## Interpretation and limitations',''] + ['- '+w for w in warnings]
+    lines += ['', '## Condition slices (image alerts only)', '',
+              '| Field | Value | Images | Positives | Negatives | Recall | False-positive rate |',
+              '|---|---|---:|---:|---:|---:|---:|']
+    for field, buckets in result['image_alert_slices'].items():
+        for value, bucket in buckets.items():
+            value = value.replace('|', '\\|').replace('\n', ' ').replace('\r', ' ')
+            lines.append(f'| {field} | {value} | {bucket["images"]} | {bucket["positive_images"]} | {bucket["negative_images"]} | {pct(bucket["metrics"]["recall"])} | {pct(bucket["metrics"]["false_positive_rate"])} |')
     lines += ['', '## Presentation wording','',
-              f'“Evaluated a pretrained YOLOv8n-based emergency-alert prototype on {len(selected)} annotated test images; measured image-level recall of {pct(metrics["recall"])}. The current evaluation lacks negative controls and a trained ambulance-specific detector, so it does not establish real-world ambulance detection accuracy.”' if mode=='app' else 'Use the detection metrics with the dataset size, split, class taxonomy and limitations above.',
+              presentation_wording(args.split, len(selected), metrics['recall'], mode, targets),
               '', '## Reproducibility','',f'- Model SHA-256: `{result["model_sha256"]}`',
               '- metrics.json records settings, environment, dataset audit and exact duplicates.',
               '- test_manifest.json records evaluated paths and image/annotation hashes.',
