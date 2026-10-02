@@ -108,6 +108,12 @@ Compatible weights enable native detection precision, recall, macro F1, mAP@0.50
 
 ## Next research steps
 
+The evaluator now adds optional scene/video provenance checks (`--metadata`),
+explicit image-alert class targets (`--target-ids`), strict protocol checks
+(`--strict-protocol`), a weights-free audit (`--audit-only`), condition summaries,
+and an FP/FN review CSV. See the [research protocol guide](EVALUATION.md#research-protocol-and-condition-analysis).
+These additions do not change the recorded baseline or establish new model performance.
+
 - Resolve the two ambulance label IDs and define the role of siren annotations.
 - Train and evaluate an ambulance-specific detector.
 - Build an independent test set with ordinary traffic, trucks, and fire hydrants as negative examples.
