@@ -55,4 +55,90 @@ The script copies labels to the output folder and links source images for native
 
 No additional training, external data downloads, or test-set tuning are performed automatically.
 
+## Research protocol and condition analysis
+
+The evaluator now supports explicit alert targets, original-scene provenance checks,
+condition summaries, and a CSV of false-positive/false-negative images. These are
+evaluation capabilities, not new measured results or improved model weights.
+The published 121-image baseline is unchanged.
+
+Create a metadata CSV with **one row for every image in train, val, and test**:
+
+```csv
+split,image,group_id,lighting,weather,source
+train,example_train.jpg,original_video_01,day,clear,camera_a
+val,example_val.jpg,original_video_02,night,rain,camera_b
+test,example_test.jpg,original_video_03,day,fog,camera_c
+```
+
+These filenames are examples only. Use `val` in the CSV even though its directory
+is `valid`. A group identifies an original scene/video **before augmentation**;
+all its frames and derived images must have the same group ID. Do not generate
+unique groups per frame to make checks pass. Assign conditions by inspecting
+source data, not by guessing from filenames. Unspecified conditions are `unknown`.
+Group IDs must be globally unique across independent sources.
+
+Audit without model weights (the current train/valid/test directory layout remains required):
+
+```sh
+python evaluate_model.py --data emergency-dataset/data.yaml \
+  --metadata scene_metadata.csv --target-ids 0 1 --audit-only --strict-protocol
+```
+
+For the supplied taxonomy, IDs 0 and 1 are the two ambulance categories; confirm
+the IDs against your own `data.yaml`. `--target-ids` affects image-level ground
+truth and, in detector mode, alert predictions. It does **not** merge categories
+or restrict native object-detection mAP, which still covers the full taxonomy.
+In app mode the original keyword prediction rule stays unchanged for a faithful
+baseline comparison. Omitting `--target-ids` preserves the old all-object proxy.
+An empty, reviewed annotation file is a negative image; a missing label is an error.
+Siren-only images are ambulance-negative when siren is excluded, not necessarily
+ordinary-traffic negatives. Include genuinely diverse hard negatives as well.
+
+Develop on validation data, then freeze the operating threshold and configuration:
+
+```sh
+python evaluate_model.py --model runs/detect/train/weights/best.pt \
+  --mode detector --split val --target-ids 0 1 --metadata scene_metadata.csv \
+  --strict-protocol --conf 0.25
+```
+
+After selecting settings on validation only, run the same frozen configuration
+with `--split test`. The flag is a check, not an enforcement of your experimental
+history: it cannot detect previous test-set tuning or fabricated provenance.
+It rejects missing provenance, any cross-split scene or exact-byte overlap, and
+an evaluated split lacking either target-positive or target-negative images.
+Without strict mode, these issues remain visible warnings for legacy baseline runs.
+
+New outputs within each run:
+
+- `metrics.json`: target IDs, provenance hash, cross-split groups, protocol issues,
+  and lighting/weather/source image-alert metrics with positive/negative counts.
+- `REPORT.md`: condition tables and wording using the actual evaluation split.
+- `failure_cases.csv`: FP/FN rows for manual error analysis; header only if none.
+- `test_manifest.json`: dataset-relative image/label paths and selected metadata.
+
+Condition results are descriptive and cannot isolate causal effects of weather or
+lighting. They are not per-condition detection mAP. Missing denominators remain
+null/N/A. Correlated frames and small slices do not support independent-image
+confidence claims. Passing checks does not prove scene independence, robustness,
+emergency status, or operational safety.
+
+### A useful experiment sequence
+
+1. Review label taxonomy and source provenance; remove cross-split source overlap
+   before retraining. Keep an untouched independent test set with hard negatives.
+2. Compare the existing COCO keyword baseline and a custom detector on identical
+   held-out images, target semantics, and recorded inference settings.
+3. Preserve seeds, training config/logs, checkpoint hashes and validation-selected
+   thresholds. Compare several training seeds if resources permit.
+4. Report detection mAP alongside fixed-threshold image recall, false-positive
+   rate, condition support, latency, and a manually reviewed error taxonomy.
+5. Write a short technical report describing hypotheses, comparisons, failures,
+   and limitations. Claim measured findings only after running the experiments.
+
+Run regression checks with `python -m unittest discover -s tests -v`. The pipeline
+test uses synthetic predictions: passing tests establishes evaluator behavior,
+not detector quality. Real checkpoint/dataset inference must be validated separately.
+
 References: [Ultralytics validation](https://docs.ultralytics.com/modes/val/) and [performance metrics](https://docs.ultralytics.com/guides/yolo-performance-metrics/).
